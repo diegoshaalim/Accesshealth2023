@@ -1,0 +1,131 @@
+===========HealthCareProfile=========
+
+
+vim /etc/systemd/system/healthcareprofile-webserver.service
+
+[Unit]
+Description=My AccessHealth Webapp Java REST Service
+[Service]
+User=root
+# The configuration file application.properties should be here:
+
+#change this to your workspace
+WorkingDirectory=/home/accesshealth
+
+#path to executable. 
+#executable is a bash script which calls jar file
+ExecStart=/home/accesshealth/healthcareprofile-0.0.1-SNAPSHOT.jar
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+/home/accesshealth/healthcareprofile-0.0.1-SNAPSHOT.jar
+
+chmod u+x healthcareprofile-0.0.1-SNAPSHOT.jar
+
+sudo systemctl daemon-reload
+sudo systemctl enable healthcareprofile-webserver.service
+sudo systemctl start healthcareprofile-webserver
+sudo systemctl stop healthcareprofile-webserver
+systemctl restart healthcareprofile-webserver
+sudo systemctl status healthcareprofile-webserver
+
+
+set up logging
+
+journalctl -f -n 1000 -u radius-webserver
+journalctl -f -u healthcareprofile-webserver
+
+===========InsurerCareProfile=========
+vim /etc/systemd/system/insurerprofile-webserver.service
+
+[Unit]
+Description=My AccessHealth Webapp Java REST Service
+[Service]
+User=root
+# The configuration file application.properties should be here:
+
+#change this to your workspace
+WorkingDirectory=/home/accesshealth
+
+#path to executable. 
+#executable is a bash script which calls jar file
+ExecStart=/home/accesshealth/insurerprofile-0.0.1-SNAPSHOT.jar
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+/home/accesshealth/insurerprofile-0.0.1-SNAPSHOT.jar
+
+chmod u+x insurerprofile-0.0.1-SNAPSHOT.jar
+
+sudo systemctl daemon-reload
+sudo systemctl enable insurerprofile-webserver.service
+sudo systemctl start insurerprofile-webserver
+sudo systemctl stop insurerprofile-webserver
+systemctl restart insurerprofile-webserver
+sudo systemctl status insurerprofile-webserver
+
+
+set up logging
+
+journalctl -f -n 1000 -u radius-webserver
+journalctl -f -u insurerprofile-webserver
+
+=========HEALTHCARE USERS================
+vim /etc/systemd/system/healthcareusers-webserver.service
+
+[Unit]
+Description=My AccessHealth Webapp Java REST Service
+[Service]
+User=root
+# The configuration file application.properties should be here:
+
+#change this to your workspace
+WorkingDirectory=/home/accesshealth
+
+#path to executable. 
+#executable is a bash script which calls jar file
+ExecStart=/home/accesshealth/healthcareusers-0.0.1-SNAPSHOT.jar
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+/home/accesshealth/healthcareusers-0.0.1-SNAPSHOT.jar
+
+chmod u+x healthcareusers-0.0.1-SNAPSHOT.jar
+
+sudo systemctl daemon-reload
+sudo systemctl enable healthcareusers-webserver.service
+sudo systemctl start healthcareusers-webserver
+sudo systemctl stop healthcareusers-webserver
+systemctl restart healthcareusers-webserver
+sudo systemctl status healthcareusers-webserver
+
+
+set up logging
+
+journalctl -f -n 1000 -u radius-webserver
+journalctl -f -u healthcareusers-webserver
+
+http://158.69.36.44:8083/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+http://158.69.36.44:8081/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+http://158.69.36.44:8082/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
